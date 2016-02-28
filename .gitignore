@@ -1,0 +1,62 @@
+.classpath
+.gradle
+.project
+.settings
+build.xml
+gen
+libs
+lint.xml
+local.properties
+proguard-project.txt
+project.properties
+
+# These are Android Studio files, might be worth including these later.
+*.iml
+.idea
+build.log
+build-log.xml
+/opencv/
+/android_all_sensors_driver/
+/android_camera_driver/
+/android_sensors_driver/
+*~
+*.log
+
+
+
+#built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+# Eclipse project files
+.classpath
+.project
+
+# Android Studio
+*.iml
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+.gradle
+build/
+
+#NDK
+obj/
