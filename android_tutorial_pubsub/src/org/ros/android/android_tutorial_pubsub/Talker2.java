@@ -108,13 +108,15 @@ public class Talker2 extends AbstractNodeMain {
                 imu.setLinearAcceleration(vector3);
                 String hi = String.valueOf(d);
                 Log.d("The vale of c", hi);
+                double g=0,h=0,r=0;
                 try {
+                    g+= 0.01*Double.parseDouble(String.valueOf(d));
+                    h+= 0.01*Double.parseDouble(String.valueOf(e));
+                    r+= 0.01*Double.parseDouble(String.valueOf(f));
+                    vector31.setX(g);
 
-
-                    vector31.setX(Double.parseDouble(String.valueOf(d)));
-
-                    vector31.setY(Double.parseDouble(String.valueOf(e)));
-                    vector31.setZ(Double.parseDouble(String.valueOf(f)));
+                    vector31.setY(h);
+                    vector31.setZ(r);
 
                     imu.setAngularVelocity(vector31);
                 }
