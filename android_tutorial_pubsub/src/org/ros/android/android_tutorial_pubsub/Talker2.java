@@ -43,6 +43,7 @@ public class Talker2 extends AbstractNodeMain {
     public void onStart(ConnectedNode connectedNode) {
         final Publisher<Imu> publisher = connectedNode.newPublisher(this.topic_name, "sensor_msgs/Imu");
         final Publisher<Vector3> publisher1 = connectedNode.newPublisher("any", "geometry_msgs/Vector3");
+        final Publisher<Vector3> publisher2 = connectedNode.newPublisher("any1", "geometry_msgs/Vector3");
         connectedNode.executeCancellableLoop(new CancellableLoop() {
 
 
@@ -96,6 +97,7 @@ public class Talker2 extends AbstractNodeMain {
 
                 //sensor_msgs.Imu imu = (Imu) publisher.newMessage();
                 geometry_msgs.Vector3 vector3 = publisher1.newMessage();
+                geometry_msgs.Vector3 vector31 = publisher2.newMessage();
 
 
                 vector3.setX(Double.parseDouble(String.valueOf(a)));
@@ -109,12 +111,12 @@ public class Talker2 extends AbstractNodeMain {
                 try {
 
 
-                    vector3.setX(Double.parseDouble(String.valueOf(d)));
+                    vector31.setX(Double.parseDouble(String.valueOf(d)));
 
-                    vector3.setY(Double.parseDouble(String.valueOf(e)));
-                    vector3.setZ(Double.parseDouble(String.valueOf(f)));
+                    vector31.setY(Double.parseDouble(String.valueOf(e)));
+                    vector31.setZ(Double.parseDouble(String.valueOf(f)));
 
-                    imu.setAngularVelocity(vector3);
+                    imu.setAngularVelocity(vector31);
                 }
                 catch (Exception e1){}
                 //str.setData("\n Accelerometer " + xyz + "\n");

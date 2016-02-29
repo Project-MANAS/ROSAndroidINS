@@ -105,9 +105,12 @@ public class MainActivity extends RosActivity {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
 
-                final double a = sensorEvent.values[0];
-                final double b = sensorEvent.values[1];
-                final double c = sensorEvent.values[2];
+                double a = sensorEvent.values[0];
+                a = Math.round(a*100.0)/100.0;
+                double b = sensorEvent.values[1];
+                b = Math.round(b*100.0)/100.0;
+                double c = sensorEvent.values[2];
+                c = Math.round(c*100.0)/100.0;
                 XYZ = Double.toString(a)+" "+Double.toString(b)+" "+Double.toString(c);
                 tvX.setText(Double.toString(a));
                 tvY.setText(Double.toString(b));
@@ -131,15 +134,17 @@ public class MainActivity extends RosActivity {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
 
-                float x = sensorEvent.values[0];
-                float y = sensorEvent.values[1];
-                float z = sensorEvent.values[2];
+                double x = sensorEvent.values[0];
+                x = Math.round(x*100.0)/100.0;
+                double y = sensorEvent.values[1];
+                y = Math.round(y*100.0)/100.0;
+                double z = sensorEvent.values[2];
+                z = Math.round(z*100.0)/100.0;
+                xyz = Double.toString(x) + " " + Double.toString(y) + " " + Double.toString(z);
 
-                xyz = Float.toString(x) + "  " + Float.toString(y) + " " + Float.toString(z);
-
-                tvx.setText(Float.toString(x));
-                tvy.setText(Float.toString(y));
-                tvz.setText(Float.toString(z));
+                tvx.setText(Double.toString(x));
+                tvy.setText(Double.toString(y));
+                tvz.setText(Double.toString(z));
 
             }
 

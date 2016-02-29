@@ -67,7 +67,7 @@ public class Talker extends AbstractNodeMain {
                 str.setData("Location: " + latLongString + this.sequenceNumber);
                 waitUntilNextLoop();
                 publisher.publish(str);
-                ++this.sequenceNumber;
+                //++this.sequenceNumber;
             }
         });
     }
