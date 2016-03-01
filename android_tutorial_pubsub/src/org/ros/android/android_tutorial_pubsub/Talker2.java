@@ -12,6 +12,7 @@ import org.ros.node.topic.Publisher;
 
 import android.util.Log;
 
+import geometry_msgs.Quaternion;
 import geometry_msgs.Vector3;
 import sensor_msgs.Imu;
 
@@ -44,6 +45,7 @@ public class Talker2 extends AbstractNodeMain {
         final Publisher<Imu> publisher = connectedNode.newPublisher(this.topic_name, "sensor_msgs/Imu");
         final Publisher<Vector3> publisher1 = connectedNode.newPublisher("any", "geometry_msgs/Vector3");
         final Publisher<Vector3> publisher2 = connectedNode.newPublisher("any1", "geometry_msgs/Vector3");
+        final Publisher<Quaternion> publisher3 = connectedNode.newPublisher("any2", "geometry_msgs/Quaternion");
         connectedNode.executeCancellableLoop(new CancellableLoop() {
 
 
@@ -60,6 +62,10 @@ public class Talker2 extends AbstractNodeMain {
                 char[] d = new char[xyz.length()];
                 char[] e = new char[xyz.length()];
                 char[] f = new char[xyz.length()];
+
+                char[] t = new char[xyz.length()];
+                char[] u = new char[xyz.length()];
+                char[] v = new char[xyz.length()];
 
                 int i;
                 for (i = 0; i < xyz.length(); i++) {
@@ -91,6 +97,21 @@ public class Talker2 extends AbstractNodeMain {
                     if (XYZ[i] == ' ') break;
                     f[n] = XYZ[i];
                 }
+                i++;
+                for (int o = 0; i < xyz.length(); i++, o++) {
+                    if (XYZ[i] == ' ') break;
+                    t[o] = XYZ[i];
+                }
+                i++;
+                for (int p = 0; i < xyz.length(); i++, p++) {
+                    if (XYZ[i] == ' ') break;
+                    u[p] = XYZ[i];
+                }
+                i++;
+                for (int q = 0; i < xyz.length(); i++, q++) {
+                    if (XYZ[i] == ' ') break;
+                    v[q] = XYZ[i];
+                }
 
 
                 sensor_msgs.Imu imu = publisher.newMessage();
@@ -98,6 +119,7 @@ public class Talker2 extends AbstractNodeMain {
                 //sensor_msgs.Imu imu = (Imu) publisher.newMessage();
                 geometry_msgs.Vector3 vector3 = publisher1.newMessage();
                 geometry_msgs.Vector3 vector31 = publisher2.newMessage();
+                geometry_msgs.Quaternion quaternion = publisher3.newMessage();
 
 
                 vector3.setX(Double.parseDouble(String.valueOf(a)));
@@ -113,12 +135,19 @@ public class Talker2 extends AbstractNodeMain {
                     g+= 0.01*Double.parseDouble(String.valueOf(d));
                     h+= 0.01*Double.parseDouble(String.valueOf(e));
                     r+= 0.01*Double.parseDouble(String.valueOf(f));
-                    vector31.setX(g);
 
+                    quaternion.setX(Double.parseDouble(String.valueOf(t)));
+                    quaternion.setY(Double.parseDouble(String.valueOf(u)));
+                    quaternion.setZ(Double.parseDouble(String.valueOf(v)));
+
+
+
+                    vector31.setX(g);
                     vector31.setY(h);
                     vector31.setZ(r);
 
                     imu.setAngularVelocity(vector31);
+                    imu.setOrientation(quaternion);
                 }
                 catch (Exception e1){}
                 //str.setData("\n Accelerometer " + xyz + "\n");

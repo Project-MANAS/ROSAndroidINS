@@ -48,8 +48,8 @@ import sensor_msgs.Imu;
  */
 public class MainActivity extends RosActivity {
 
-    private SensorManager mSensorManager, mSensorManager1;
-    private Sensor mAccelerometer, mGyroscope;
+    private SensorManager mSensorManager, mSensorManager1, mSensorManager2;
+    private Sensor mAccelerometer, mGyroscope, mOrientation;
     private final float NOISE = (float) 0.5;
     private Quaternion q1;
     private Imu imu;
@@ -63,6 +63,7 @@ public class MainActivity extends RosActivity {
     //private SensorEvent event1;
     String xyz;
     String XYZ;
+    String xYz;
 
     public MainActivity() {
         // The RosActivity constructor configures the notification title and ticker
@@ -153,6 +154,26 @@ public class MainActivity extends RosActivity {
             }
         }, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
 
+        mSensorManager2 = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mOrientation = mSensorManager2.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+        mSensorManager2.registerListener(new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                double x = sensorEvent.values[0];
+                x = Math.round(x*100.0)/100.0;
+                double y = sensorEvent.values[1];
+                y = Math.round(y*100.0)/100.0;
+                double z = sensorEvent.values[2];
+                z = Math.round(z*100.0)/100.0;
+                xYz = Double.toString(x) + " " + Double.toString(y) + " " + Double.toString(z);
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {
+
+            }
+        },mOrientation, SensorManager.SENSOR_DELAY_NORMAL);
+
 
         LocationListener myLocationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
@@ -223,7 +244,7 @@ public class MainActivity extends RosActivity {
         talker2.setDataListener(new DataListener<String>() {
             @Override
             public String getData() {
-                return (XYZ+" "+xyz);
+                return (XYZ+" "+xyz+" "+ xYz);
             }
             /*@Override
             public Object getX()
