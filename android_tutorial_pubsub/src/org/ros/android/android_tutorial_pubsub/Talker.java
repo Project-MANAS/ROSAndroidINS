@@ -35,7 +35,7 @@ public class Talker extends AbstractNodeMain {
     };*/
 
     public Talker() {
-        this.topic_name = "chatter";
+        this.topic_name = "fix";
     }
 
     /*public Talker(String topic) {
@@ -47,34 +47,34 @@ public class Talker extends AbstractNodeMain {
     }
 
     public void onStart(ConnectedNode connectedNode) {
-        final Publisher publisher = connectedNode.newPublisher(this.topic_name, "std_msgs/String");
+        //final Publisher publisher = connectedNode.newPublisher(this.topic_name, "std_msgs/String");
 
-        final Publisher<NavSatFix> publisher1 = connectedNode.newPublisher("NavSatFix", "sensor_msgs/NavSatFix");
+        final Publisher<NavSatFix> publisher1 = connectedNode.newPublisher(this.topic_name, "sensor_msgs/NavSatFix");
         final NavSatFix NavSatFix = publisher1.newMessage();
         connectedNode.executeCancellableLoop(new CancellableLoop() {
-            private int sequenceNumber;
+            //private int sequenceNumber;
 
-            protected void setup() {
+            /*protected void setup() {
                 this.sequenceNumber = 0;
-            }
+            }*/
 
             protected void loop() throws InterruptedException {
-                std_msgs.String str = (std_msgs.String) publisher.newMessage();
-                String latLongString = null;
+                //std_msgs.String str = (std_msgs.String) publisher.newMessage();
+                //String latLongString = null;
                 Location location = (Location) dataListener.getData();
 
 
                 if (location != null) {
-                    double lat = location.getLatitude();
+                    /*double lat = location.getLatitude();
                     double lng = location.getLongitude();
-                    latLongString = "Lat:" + lat + "\nLong:" + lng;
+                    latLongString = "Lat:" + lat + "\nLong:" + lng;*/
 
                     NavSatFix.setLatitude(location.getLatitude());
                     NavSatFix.setLongitude(location.getLongitude());
                 }
-                str.setData("Location: " + latLongString);
+                //str.setData("Location: " + latLongString);
                 waitUntilNextLoop();
-                publisher.publish(str);
+                //publisher.publish(str);
                 publisher1.publish(NavSatFix);
                 //++this.sequenceNumber;
             }

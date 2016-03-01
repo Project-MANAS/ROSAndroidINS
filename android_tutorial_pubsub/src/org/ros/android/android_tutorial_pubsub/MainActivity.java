@@ -29,17 +29,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import org.ros.android.MessageCallable;
 import org.ros.android.RosActivity;
-import org.ros.android.view.RosTextView;
-import org.ros.message.MessageFactory;
 import org.ros.node.NodeConfiguration;
 import org.ros.node.NodeMainExecutor;
 
-import java.util.Vector;
-
 import geometry_msgs.Quaternion;
-import geometry_msgs.Vector3;
 import sensor_msgs.Imu;
 
 
@@ -53,7 +47,7 @@ public class MainActivity extends RosActivity {
     private final float NOISE = (float) 0.5;
     private Quaternion q1;
     private Imu imu;
-    private RosTextView<std_msgs.String> rosTextView;
+    //private RosTextView<std_msgs.String> rosTextView;
     private Talker talker;
     private Talker1 talker1;
     private Talker2 talker2;
@@ -107,12 +101,12 @@ public class MainActivity extends RosActivity {
             public void onSensorChanged(SensorEvent sensorEvent) {
 
                 double a = sensorEvent.values[0];
-                a = Math.round(a*100.0)/100.0;
+                a = Math.round(a * 100.0) / 100.0;
                 double b = sensorEvent.values[1];
-                b = Math.round(b*100.0)/100.0;
+                b = Math.round(b * 100.0) / 100.0;
                 double c = sensorEvent.values[2];
-                c = Math.round(c*100.0)/100.0;
-                XYZ = Double.toString(a)+" "+Double.toString(b)+" "+Double.toString(c);
+                c = Math.round(c * 100.0) / 100.0;
+                XYZ = Double.toString(a) + " " + Double.toString(b) + " " + Double.toString(c);
                 tvX.setText(Double.toString(a));
                 tvY.setText(Double.toString(b));
                 tvZ.setText(Double.toString(c));
@@ -136,11 +130,11 @@ public class MainActivity extends RosActivity {
             public void onSensorChanged(SensorEvent sensorEvent) {
 
                 double x = sensorEvent.values[0];
-                x = Math.round(x*100.0)/100.0;
+                x = Math.round(x * 100.0) / 100.0;
                 double y = sensorEvent.values[1];
-                y = Math.round(y*100.0)/100.0;
+                y = Math.round(y * 100.0) / 100.0;
                 double z = sensorEvent.values[2];
-                z = Math.round(z*100.0)/100.0;
+                z = Math.round(z * 100.0) / 100.0;
                 xyz = Double.toString(x) + " " + Double.toString(y) + " " + Double.toString(z);
 
                 tvx.setText(Double.toString(x));
@@ -160,11 +154,11 @@ public class MainActivity extends RosActivity {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 double x = sensorEvent.values[0];
-                x = Math.round(x*100.0)/100.0;
+                x = Math.round(x * 100.0) / 100.0;
                 double y = sensorEvent.values[1];
-                y = Math.round(y*100.0)/100.0;
+                y = Math.round(y * 100.0) / 100.0;
                 double z = sensorEvent.values[2];
-                z = Math.round(z*100.0)/100.0;
+                z = Math.round(z * 100.0) / 100.0;
                 xYz = Double.toString(x) + " " + Double.toString(y) + " " + Double.toString(z);
             }
 
@@ -172,7 +166,7 @@ public class MainActivity extends RosActivity {
             public void onAccuracyChanged(Sensor sensor, int i) {
 
             }
-        },mOrientation, SensorManager.SENSOR_DELAY_NORMAL);
+        }, mOrientation, SensorManager.SENSOR_DELAY_NORMAL);
 
 
         LocationListener myLocationListener = new LocationListener() {
@@ -198,7 +192,7 @@ public class MainActivity extends RosActivity {
         updateWithNewLocation(l);
         locationManager.requestLocationUpdates(provider, t, distance, myLocationListener);
 
-        rosTextView = (RosTextView<std_msgs.String>) findViewById(R.id.text);
+        /*rosTextView = (RosTextView<std_msgs.String>) findViewById(R.id.text);
         rosTextView.setTopicName("chatter");
         rosTextView.setMessageType(std_msgs.String._TYPE);
         rosTextView.setMessageToStringCallable(new MessageCallable<String, std_msgs.String>() {
@@ -206,7 +200,7 @@ public class MainActivity extends RosActivity {
             public String call(std_msgs.String message) {
                 return message.getData();
             }
-        });
+        });*/
     }
 
     private void updateWithNewLocation(Location location) {
@@ -244,7 +238,7 @@ public class MainActivity extends RosActivity {
         talker2.setDataListener(new DataListener<String>() {
             @Override
             public String getData() {
-                return (XYZ+" "+xyz+" "+ xYz);
+                return (XYZ + " " + xyz + " " + xYz);
             }
             /*@Override
             public Object getX()
@@ -262,11 +256,11 @@ public class MainActivity extends RosActivity {
         NodeConfiguration nodeConfiguration = NodeConfiguration.newPublic(getRosHostname());
         nodeConfiguration.setMasterUri(getMasterUri());
         nodeMainExecutor.execute(talker, nodeConfiguration);
-        nodeMainExecutor.execute(talker1, nodeConfiguration);
+        //nodeMainExecutor.execute(talker1, nodeConfiguration);
         nodeMainExecutor.execute(talker2, nodeConfiguration);
         // The RosTextView is also a NodeMain that must be executed in order to
         // start displaying incoming messages.
-        nodeMainExecutor.execute(rosTextView, nodeConfiguration);
+        //nodeMainExecutor.execute(rosTextView, nodeConfiguration);
     }
 
 

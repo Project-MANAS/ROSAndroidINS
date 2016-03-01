@@ -30,7 +30,7 @@ public class Talker2 extends AbstractNodeMain {
     };
 
     public Talker2() {
-        this.topic_name = "chatter2";
+        this.topic_name = "imu_data";
     }
 
     /*public talker2(String topic) {
@@ -43,9 +43,9 @@ public class Talker2 extends AbstractNodeMain {
 
     public void onStart(ConnectedNode connectedNode) {
         final Publisher<Imu> publisher = connectedNode.newPublisher(this.topic_name, "sensor_msgs/Imu");
-        final Publisher<Vector3> publisher1 = connectedNode.newPublisher("any", "geometry_msgs/Vector3");
-        final Publisher<Vector3> publisher2 = connectedNode.newPublisher("any1", "geometry_msgs/Vector3");
-        final Publisher<Quaternion> publisher3 = connectedNode.newPublisher("any2", "geometry_msgs/Quaternion");
+        //final Publisher<Vector3> publisher1 = connectedNode.newPublisher("any", "geometry_msgs/Vector3");
+        //final Publisher<Vector3> publisher2 = connectedNode.newPublisher("any1", "geometry_msgs/Vector3");
+        //final Publisher<Quaternion> publisher3 = connectedNode.newPublisher("any2", "geometry_msgs/Quaternion");
         connectedNode.executeCancellableLoop(new CancellableLoop() {
 
 
@@ -53,7 +53,7 @@ public class Talker2 extends AbstractNodeMain {
                 //std_msgs.String str = (std_msgs.String) publisher.newMessage();
                 //String[] xyz;
                 String xyz = (String) dataListener.getData();
-                Log.d("The String Value", xyz);
+                //Log.d("The String Value", xyz);
                 char[] XYZ = xyz.toCharArray();
                 char[] a = new char[xyz.length()];
                 char[] b = new char[xyz.length()];
@@ -116,38 +116,39 @@ public class Talker2 extends AbstractNodeMain {
 
                 sensor_msgs.Imu imu = publisher.newMessage();
 
+
                 //sensor_msgs.Imu imu = (Imu) publisher.newMessage();
-                geometry_msgs.Vector3 vector3 = publisher1.newMessage();
-                geometry_msgs.Vector3 vector31 = publisher2.newMessage();
-                geometry_msgs.Quaternion quaternion = publisher3.newMessage();
+                //geometry_msgs.Vector3 vector3 = publisher1.newMessage();
+                //geometry_msgs.Vector3 vector31 = publisher2.newMessage();
+                //geometry_msgs.Quaternion quaternion = publisher3.newMessage();
 
 
-                vector3.setX(Double.parseDouble(String.valueOf(a)));
+                imu.getLinearAcceleration().setX(Double.parseDouble(String.valueOf(a)));
                 /*String hi = String.valueOf(c);
                 Log.d("The vale of c",hi);*/
-                vector3.setY(Double.parseDouble(String.valueOf(b)));
-                vector3.setZ(Double.parseDouble(String.valueOf(c)));
-                imu.setLinearAcceleration(vector3);
+                imu.getLinearAcceleration().setY(Double.parseDouble(String.valueOf(b)));
+                imu.getLinearAcceleration().setZ(Double.parseDouble(String.valueOf(c)));
+                //imu.setLinearAcceleration(vector3);
                 String hi = String.valueOf(d);
-                Log.d("The vale of c", hi);
+                //Log.d("The vale of c", hi);
                 double g=0,h=0,r=0;
                 try {
                     g+= 0.01*Double.parseDouble(String.valueOf(d));
                     h+= 0.01*Double.parseDouble(String.valueOf(e));
                     r+= 0.01*Double.parseDouble(String.valueOf(f));
 
-                    quaternion.setX(Double.parseDouble(String.valueOf(t)));
-                    quaternion.setY(Double.parseDouble(String.valueOf(u)));
-                    quaternion.setZ(Double.parseDouble(String.valueOf(v)));
+                    imu.getOrientation().setX(Double.parseDouble(String.valueOf(t)));
+                    imu.getOrientation().setY(Double.parseDouble(String.valueOf(u)));
+                    imu.getOrientation().setZ(Double.parseDouble(String.valueOf(v)));
 
 
 
-                    vector31.setX(g);
-                    vector31.setY(h);
-                    vector31.setZ(r);
+                    imu.getAngularVelocity().setX(g);
+                    imu.getAngularVelocity().setY(h);
+                    imu.getAngularVelocity().setZ(r);
 
-                    imu.setAngularVelocity(vector31);
-                    imu.setOrientation(quaternion);
+                    //imu.setAngularVelocity(vector31);
+                    //imu.setOrientation(quaternion);
                 }
                 catch (Exception e1){}
                 //str.setData("\n Accelerometer " + xyz + "\n");
