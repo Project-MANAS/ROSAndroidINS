@@ -2,197 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+              android:padding="4dp">
 
 
-    <TableLayout
-
-        android:paddingTop="10dip"
-
-        android:layout_width="fill_parent"
-
-        android:layout_height="wrap_content"
-
-        android:stretchColumns="*">
-        <TableRow>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:textSize="14sp"
-
-                android:text="X-Axis"
-
-                android:gravity="center"/>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:textSize="14sp"
-
-                android:text="Y-Axis"
-
-                android:gravity="center"/>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:textSize="14sp"
-
-                android:text="Z-Axis"
-
-                android:gravity="center"/>
-
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:id="@+id/x_axis"
-
-                android:gravity="center"/>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:id="@+id/y_axis"
-
-                android:gravity="center"/>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:id="@+id/z_axis"
-
-                android:gravity="center"/>
-
-        </TableRow>
-
-    </TableLayout>
-
-    <TableLayout
-
-        android:paddingTop="10dip"
-
-        android:layout_width="fill_parent"
-
-        android:layout_height="wrap_content"
-
-        android:stretchColumns="*">
-        <TableRow>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:textSize="14sp"
-
-                android:text="X-Axis"
-
-                android:gravity="center"/>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:textSize="14sp"
-
-                android:text="Y-Axis"
-
-                android:gravity="center"/>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:textSize="14sp"
-
-                android:text="Z-Axis"
-
-                android:gravity="center"/>
-
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:id="@+id/X_axis"
-
-                android:gravity="center"/>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:id="@+id/Y_axis"
-
-                android:gravity="center"/>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-
-                android:id="@+id/Z_axis"
-
-                android:gravity="center"/>
-
-        </TableRow>
-
-    </TableLayout>
-
-    <ImageView
-
-        android:paddingTop="10dip"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/image"
-
-        android:layout_gravity="center"
-
-        android:visibility="invisible"/>
     <TextView
-        android:id="@+id/accelerometer_text"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_location_frame_id"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal"/>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_location_frame_id"
+        android:text="@string/default_location_frame_id"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_imu_frame_id"
+        android:id="@+id/textView3"
+        android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_imu_frame_id"
+        android:text="@string/default_imu_frame_id"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/apply"
+        android:id="@+id/b_apply"
+        android:layout_marginTop="4dp"/>
 
 </LinearLayout>

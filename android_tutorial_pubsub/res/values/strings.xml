@@ -3,5 +3,10 @@
 
     <string name="app_name">SensorInterfacing</string>
     <string name="Hello">Hello</string>
+    <string name="apply">Apply</string>
+    <string name="default_location_frame_id">fix</string>
+    <string name="default_imu_frame_id">imu</string>
+    <string name="label_location_frame_id">Location Frame ID</string>
+    <string name="label_imu_frame_id">IMU Frame ID</string>
 
 </resources>
